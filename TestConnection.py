@@ -53,7 +53,7 @@ dag = DAG(
     'Test_sql_server_Connection',
     default_args=default_args,
     description='A simple DAG to connect to SQL Server using pyodbc',
-    schedule_interval=None,  # Set to None to run only once
+    schedule=None,  # Set to None to run only once
     catchup=False,  # Ensure the DAG does not backfill
 )
 
