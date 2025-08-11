@@ -112,14 +112,15 @@ def upsert_and_insert_data():
 
 default_args = {
     'owner': 'airflow',
-    'start_date': datetime(2023, 1, 1),
+    'start_date': datetime(2025, 1, 1),
     'retries': 1,
 }
 
 with DAG('ISI_SI_Upsert_Insert',
          default_args=default_args,
-         schedule='@daily',
-         catchup=False) as dag:
+         schedule=None,  # Set to None to run only once
+        catchup=False,  # Ensure the DAG does not backfill
+        ) as dag:
 
 
     upsert_and_insert_task = PythonOperator(
