@@ -121,7 +121,6 @@ with DAG('ISI_SI_Upsert_Insert',
          schedule='@daily',
          catchup=False) as dag:
 
-    start = DummyOperator(task_id='start')
 
     upsert_and_insert_task = PythonOperator(
         task_id='upsert_and_insert_data',
