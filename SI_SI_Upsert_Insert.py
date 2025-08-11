@@ -104,7 +104,7 @@ def upsert_and_insert_data():
     #dev_cursor.execute("ALTER TABLE dbo.ITEM_STORE_INFO WITH CHECK CHECK CONSTRAINT FK_ITEM_STORE_INFO_STORE_ITEM") ## issue
     print("Enable foreign key constraintd")
     dev_conn.commit()
-    print("Commit doned")
+    print("Commit done")
 
     prod_conn.close()
     dev_conn.close()
@@ -119,13 +119,14 @@ default_args = {
 with DAG('ISI_SI_Upsert_Insert',
          default_args=default_args,
          schedule=None,  # Set to None to run only once
-        catchup=False,  # Ensure the DAG does not backfill
+    catchup=False,  # Ensure the DAG does not backfill
         ) as dag:
 
 
     upsert_and_insert_task = PythonOperator(
         task_id='upsert_and_insert_data',
-        python_callable=upsert_and_insert_data
+        python_callable=upsert_and_insert_data,
+        dag=dag,
     )
 
     upsert_and_insert_task
