@@ -2,7 +2,7 @@ import os
 import pyodbc
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.dummy import DummyOperator
 from datetime import datetime
 
 
