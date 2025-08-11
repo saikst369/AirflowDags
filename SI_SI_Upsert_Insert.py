@@ -2,7 +2,6 @@ import os
 import pyodbc
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.dummy import DummyOperator
 from datetime import datetime
 
 
@@ -119,7 +118,7 @@ default_args = {
 
 with DAG('ISI_SI_Upsert_Insert',
          default_args=default_args,
-         schedule_interval='@daily',
+         schedule='@daily',
          catchup=False) as dag:
 
     start = DummyOperator(task_id='start')
@@ -129,4 +128,4 @@ with DAG('ISI_SI_Upsert_Insert',
         python_callable=upsert_and_insert_data
     )
 
-    start >> upsert_and_insert_task
+    upsert_and_insert_task
